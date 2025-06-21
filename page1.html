@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>1337 Collaboration Hub</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+    }
+    .hero-gradient {
+      background: linear-gradient(90deg, #3ba5f6 0%, #2595eb 100%);
+    }
+    .feature-card,
+    .testimonial-card {
+      transition: all 0.3s ease;
+    }
+    .feature-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+    .testimonial-card:hover {
+      transform: scale(1.03);
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav class="bg-white shadow-md py-4 px-6 md:px-12">
+    <div class="max-w-7xl mx-auto flex justify-between items-center">
+      <div class="flex items-center space-x-2">
+        <div class="h-10 w-10 bg-blue-600 rounded-lg flex items-center justify-center">
+          <span class="text-white font-bold text-xl">1337</span>
+        </div>
+        <span class="font-bold text-xl text-gray-800">Collaboration Hub</span>
+      </div>
+      <div class="hidden md:flex space-x-8">
+        <a href="#" class="text-gray-600 hover:text-blue-600 font-medium">Home</a>
+        <a href="#" class="text-gray-600 hover:text-blue-600 font-medium">Features</a>
+        <a href="#" class="text-gray-600 hover:text-blue-600 font-medium">Testimonials</a>
+        <a href="page7.html" class="text-gray-600 hover:text-blue-600 font-medium">Contact</a>
+      </div>
+      <div>
+        <button class="bg-blue-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-blue-700 transition duration-300">Sign In</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero-gradient text-white py-20 px-6 md:px-12">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center max-w-3xl mx-auto">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6">Collaborate, Learn, Succeed Together</h1>
+        <p class="text-xl mb-10">A collaborative platform for 1337 students to share exercises, communicate, and prepare for the pool assessment.</p>
+        <a href="#" class="bg-white text-blue-600 px-8 py-3 rounded-lg font-medium hover:bg-gray-100 transition duration-300 shadow-lg">Get Started</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="py-20 px-6 md:px-12">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="text-3xl font-bold text-center mb-16 text-gray-800">Our Platform Features</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+        <!-- Feature 1 -->
+        <div class="feature-card bg-white rounded-xl shadow-lg p-8 text-center">
+          <div class="text-5xl mb-6">📝</div>
+          <h3 class="text-xl font-semibold mb-4 text-gray-800">Share Your Exercises</h3>
+          <p class="text-gray-600">Share your exercises with the community, get feedback, and help others improve their code. Collaborative learning at its best.</p>
+          <a href="page2.html" class="mt-8 inline-block bg-blue-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-blue-700 transition duration-300">Explore Exercises</a>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="feature-card bg-white rounded-xl shadow-lg p-8 text-center">
+          <div class="text-5xl mb-6">🎧</div>
+          <h3 class="text-xl font-semibold mb-4 text-gray-800">Join Voice Rooms</h3>
+          <p class="text-gray-600">Connect with peers in voice rooms for group study sessions. Discuss problems, share solutions, and learn together.</p>
+          <a href="page4.html" class="mt-8 inline-block bg-blue-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-blue-700 transition duration-300">Join Voice Rooms</a>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="feature-card bg-white rounded-xl shadow-lg p-8 text-center">
+          <div class="text-5xl mb-6">✅</div>
+          <h3 class="text-xl font-semibold mb-4 text-gray-800">Pool Readiness Test</h3>
+          <p class="text-gray-600">Test your readiness for the pool with our assessment tools. Practice with real-world examples and get instant feedback.</p>
+          <a href="page5.html" class="mt-8 inline-block bg-blue-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-blue-700 transition duration-300">Take a Test</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="py-20 px-6 md:px-12 bg-gray-100">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="text-3xl font-bold text-center mb-16 text-gray-800">Success Stories</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Testimonial 1 -->
+        <div class="testimonial-card bg-white rounded-xl shadow-md p-6">
+          <div class="flex items-center mb-4">
+            <div class="h-12 w-12 bg-blue-100 rounded-full flex items-center justify-center">
+              <span class="text-blue-600 font-bold">AM</span>
+            </div>
+            <div class="ml-4">
+              <h4 class="font-semibold text-gray-800">Ahmed M.</h4>
+              <p class="text-gray-500 text-sm">Pool Completed</p>
+            </div>
+          </div>
+          <p class="text-gray-600">"The practice exercises and peer reviews helped me identify my weak points. I passed the pool with confidence thanks to this platform!"</p>
+          <div class="mt-4 flex text-yellow-400">★★★★★</div>
+        </div>
+
+        <!-- Testimonial 2 -->
+        <div class="testimonial-card bg-white rounded-xl shadow-md p-6">
+          <div class="flex items-center mb-4">
+            <div class="h-12 w-12 bg-blue-100 rounded-full flex items-center justify-center">
+              <span class="text-blue-600 font-bold">SL</span>
+            </div>
+            <div class="ml-4">
+              <h4 class="font-semibold text-gray-800">Sara L.</h4>
+              <p class="text-gray-500 text-sm">Current Student</p>
+            </div>
+          </div>
+          <p class="text-gray-600">"The voice rooms are amazing! I've made friends who help me understand complex concepts. My coding skills have improved dramatically."</p>
+          <div class="mt-4 flex text-yellow-400">★★★★★</div>
+        </div>
+
+        <!-- Testimonial 3 -->
+        <div class="testimonial-card bg-white rounded-xl shadow-md p-6">
+          <div class="flex items-center mb-4">
+            <div class="h-12 w-12 bg-blue-100 rounded-full flex items-center justify-center">
+              <span class="text-blue-600 font-bold">YK</span>
+            </div>
+            <div class="ml-4">
+              <h4 class="font-semibold text-gray-800">Yousef K.</h4>
+              <p class="text-gray-500 text-sm">Graduate</p>
+            </div>
+          </div>
+          <p class="text-gray-600">"I shared my exercises regularly and the feedback I received was invaluable. This community helped me become a better programmer."</p>
+          <div class="mt-4 flex text-yellow-400">★★★★★</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="py-16 px-6 md:px-12">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-3xl font-bold mb-6 text-gray-800">Ready to Join Our Community?</h2>
+      <p class="text-xl text-gray-600 mb-10">Connect with fellow 1337 students and accelerate your learning journey today.</p>
+      <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-6">
+        <button class="bg-blue-600 text-white px-8 py-3 rounded-lg font-medium hover:bg-blue-700 transition duration-300 shadow-lg">Sign Up Now</button>
+        <button class="bg-white border-2 border-blue-600 text-blue-600 px-8 py-3 rounded-lg font-medium hover:bg-blue-50 transition duration-300 shadow-lg">Learn More</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white py-12 px-6 md:px-12">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10">
+      <div>
+        <div class="flex items-center space-x-2 mb-6">
+          <div class="h-10 w-10 bg-blue-600 rounded-lg flex items-center justify-center">
+            <span class="text-white font-bold text-xl">1337</span>
+          </div>
+          <span class="font-bold text-xl">Collaboration Hub</span>
+        </div>
+        <p class="text-gray-400">Empowering 1337 students to learn, collaborate, and succeed together.</p>
+      </div>
+
+      <div>
+        <h4 class="font-semibold text-lg mb-4">Features</h4>
+        <ul class="space-y-2 text-gray-400">
+          <li><a href="#" class="hover:text-white transition duration-300">Exercise Sharing</a></li>
+          <li><a href="#" class="hover:text-white transition duration-300">Voice Rooms</a></li>
+          <li><a href="#" class="hover:text-white transition duration-300">Pool Assessment</a></li>
+          <li><a href="#" class="hover:text-white transition duration-300">Community Support</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-semibold text-lg mb-4">Resources</h4>
+        <ul class="space-y-2 text-gray-400">
+          <li><a href="#" class="hover:text-white transition duration-300">Documentation</a></li>
+          <li><a href="#" class="hover:text-white transition duration-300">Tutorials</a></li>
+          <li><a href="#" class="hover:text-white transition duration-300">FAQ</a></li>
+          <li><a href="#" class="hover:text-white transition duration-300">Support</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-semibold text-lg mb-4">Contact</h4>
+        <ul class="space-y-2 text-gray-400">
+          <li>Email: contact@1337hub.com</li>
+          <li>Discord: 1337Hub</li>
+          <li>GitHub: @1337-collaboration-hub</li>
+        </ul>
+      </div>
+    </div>
+    <div class="max-w-7xl mx-auto mt-12 pt-8 border-t border-gray-700 text-center text-gray-400">
+      <p>© 2023 1337 Collaboration Hub. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>

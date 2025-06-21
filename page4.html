@@ -1,0 +1,689 @@
+<html lang="en"><head><script src="chrome-extension://infdcenbdoibcacogknkjleclhnjdmfh/content/captcha/recaptcha/hunter.js"></script><script src="chrome-extension://infdcenbdoibcacogknkjleclhnjdmfh/content/captcha/recaptcha/interceptor.js"></script><script src="chrome-extension://infdcenbdoibcacogknkjleclhnjdmfh/content/communication_helpers.js"></script><script src="chrome-extension://infdcenbdoibcacogknkjleclhnjdmfh/content/core_helpers.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice Rooms - 1337 Collaboration Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8fafc;
+        }
+        .room-card {
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        .room-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border-color: #3b82f6;
+        }
+        .timer-display {
+            font-family: 'Courier New', monospace;
+            font-size: 3rem;
+            font-weight: 700;
+        }
+        .timer-button {
+            transition: all 0.2s ease;
+        }
+        .timer-button:hover {
+            transform: scale(1.05);
+        }
+        .timer-button:active {
+            transform: scale(0.95);
+        }
+        .progress-ring {
+            transform: rotate(-90deg);
+        }
+        .progress-ring__circle {
+            stroke-dasharray: 283;
+            transition: stroke-dashoffset 0.3s;
+        }
+        .user-avatar {
+            transition: all 0.2s ease;
+        }
+        .user-avatar:hover {
+            transform: scale(1.1);
+        }
+        .discord-button {
+            background-color: #5865F2;
+            transition: all 0.2s ease;
+        }
+        .discord-button:hover {
+            background-color: #4752c4;
+        }
+    </style>
+<style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.16 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.inset-0{inset:0px}.z-50{z-index:50}.mx-4{margin-left:1rem;margin-right:1rem}.mx-auto{margin-left:auto;margin-right:auto}.mx-2{margin-left:0.5rem;margin-right:0.5rem}.mb-2{margin-bottom:0.5rem}.mb-4{margin-bottom:1rem}.mb-6{margin-bottom:1.5rem}.mb-8{margin-bottom:2rem}.ml-2{margin-left:0.5rem}.mr-1{margin-right:0.25rem}.mr-2{margin-right:0.5rem}.mr-3{margin-right:0.75rem}.mt-4{margin-top:1rem}.mb-3{margin-bottom:0.75rem}.ml-1{margin-left:0.25rem}.mt-1{margin-top:0.25rem}.mt-10{margin-top:2.5rem}.mt-6{margin-top:1.5rem}.flex{display:flex}.grid{display:grid}.hidden{display:none}.h-10{height:2.5rem}.h-3{height:0.75rem}.h-7{height:1.75rem}.h-8{height:2rem}.h-12{height:3rem}.h-6{height:1.5rem}.w-10{width:2.5rem}.w-3{width:0.75rem}.w-7{width:1.75rem}.w-8{width:2rem}.w-12{width:3rem}.w-6{width:1.5rem}.w-full{width:100%}.max-w-7xl{max-width:80rem}.max-w-md{max-width:28rem}.cursor-pointer{cursor:pointer}.grid-cols-1{grid-template-columns:repeat(1, minmax(0, 1fr))}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.items-start{align-items:flex-start}.items-center{align-items:center}.justify-end{justify-content:flex-end}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-6{gap:1.5rem}.gap-8{gap:2rem}.gap-2{gap:0.5rem}.-space-x-2 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(-0.5rem * var(--tw-space-x-reverse));margin-left:calc(-0.5rem * calc(1 - var(--tw-space-x-reverse)))}.space-x-2 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(0.5rem * var(--tw-space-x-reverse));margin-left:calc(0.5rem * calc(1 - var(--tw-space-x-reverse)))}.space-x-4 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(1rem * var(--tw-space-x-reverse));margin-left:calc(1rem * calc(1 - var(--tw-space-x-reverse)))}.space-x-8 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(2rem * var(--tw-space-x-reverse));margin-left:calc(2rem * calc(1 - var(--tw-space-x-reverse)))}.space-y-3 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.75rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.75rem * var(--tw-space-y-reverse))}.overflow-hidden{overflow:hidden}.rounded{border-radius:0.25rem}.rounded-full{border-radius:9999px}.rounded-lg{border-radius:0.5rem}.rounded-xl{border-radius:0.75rem}.border-2{border-width:2px}.border-b-2{border-bottom-width:2px}.border-b{border-bottom-width:1px}.border-t{border-top-width:1px}.border-blue-600{--tw-border-opacity:1;border-color:rgb(37 99 235 / var(--tw-border-opacity, 1))}.border-white{--tw-border-opacity:1;border-color:rgb(255 255 255 / var(--tw-border-opacity, 1))}.border-gray-100{--tw-border-opacity:1;border-color:rgb(243 244 246 / var(--tw-border-opacity, 1))}.border-gray-200{--tw-border-opacity:1;border-color:rgb(229 231 235 / var(--tw-border-opacity, 1))}.bg-blue-100{--tw-bg-opacity:1;background-color:rgb(219 234 254 / var(--tw-bg-opacity, 1))}.bg-blue-50{--tw-bg-opacity:1;background-color:rgb(239 246 255 / var(--tw-bg-opacity, 1))}.bg-blue-600{--tw-bg-opacity:1;background-color:rgb(37 99 235 / var(--tw-bg-opacity, 1))}.bg-gray-200{--tw-bg-opacity:1;background-color:rgb(229 231 235 / var(--tw-bg-opacity, 1))}.bg-green-100{--tw-bg-opacity:1;background-color:rgb(220 252 231 / var(--tw-bg-opacity, 1))}.bg-green-500{--tw-bg-opacity:1;background-color:rgb(34 197 94 / var(--tw-bg-opacity, 1))}.bg-purple-100{--tw-bg-opacity:1;background-color:rgb(243 232 255 / var(--tw-bg-opacity, 1))}.bg-purple-50{--tw-bg-opacity:1;background-color:rgb(250 245 255 / var(--tw-bg-opacity, 1))}.bg-red-100{--tw-bg-opacity:1;background-color:rgb(254 226 226 / var(--tw-bg-opacity, 1))}.bg-white{--tw-bg-opacity:1;background-color:rgb(255 255 255 / var(--tw-bg-opacity, 1))}.bg-black{--tw-bg-opacity:1;background-color:rgb(0 0 0 / var(--tw-bg-opacity, 1))}.bg-gray-100{--tw-bg-opacity:1;background-color:rgb(243 244 246 / var(--tw-bg-opacity, 1))}.bg-gray-300{--tw-bg-opacity:1;background-color:rgb(209 213 219 / var(--tw-bg-opacity, 1))}.bg-gray-50{--tw-bg-opacity:1;background-color:rgb(249 250 251 / var(--tw-bg-opacity, 1))}.bg-green-50{--tw-bg-opacity:1;background-color:rgb(240 253 244 / var(--tw-bg-opacity, 1))}.bg-yellow-100{--tw-bg-opacity:1;background-color:rgb(254 249 195 / var(--tw-bg-opacity, 1))}.bg-yellow-50{--tw-bg-opacity:1;background-color:rgb(254 252 232 / var(--tw-bg-opacity, 1))}.bg-yellow-500{--tw-bg-opacity:1;background-color:rgb(234 179 8 / var(--tw-bg-opacity, 1))}.bg-opacity-50{--tw-bg-opacity:0.5}.p-4{padding:1rem}.p-6{padding:1.5rem}.px-2\.5{padding-left:0.625rem;padding-right:0.625rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.py-0\.5{padding-top:0.125rem;padding-bottom:0.125rem}.py-2{padding-top:0.5rem;padding-bottom:0.5rem}.py-4{padding-top:1rem;padding-bottom:1rem}.py-8{padding-top:2rem;padding-bottom:2rem}.px-3{padding-left:0.75rem;padding-right:0.75rem}.px-4{padding-left:1rem;padding-right:1rem}.py-1{padding-top:0.25rem;padding-bottom:0.25rem}.pb-6{padding-bottom:1.5rem}.text-center{text-align:center}.text-2xl{font-size:1.5rem;line-height:2rem}.text-3xl{font-size:1.875rem;line-height:2.25rem}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-xs{font-size:0.75rem;line-height:1rem}.font-bold{font-weight:700}.font-medium{font-weight:500}.font-semibold{font-weight:600}.text-blue-600{--tw-text-opacity:1;color:rgb(37 99 235 / var(--tw-text-opacity, 1))}.text-gray-300{--tw-text-opacity:1;color:rgb(209 213 219 / var(--tw-text-opacity, 1))}.text-gray-500{--tw-text-opacity:1;color:rgb(107 114 128 / var(--tw-text-opacity, 1))}.text-gray-600{--tw-text-opacity:1;color:rgb(75 85 99 / var(--tw-text-opacity, 1))}.text-gray-700{--tw-text-opacity:1;color:rgb(55 65 81 / var(--tw-text-opacity, 1))}.text-gray-800{--tw-text-opacity:1;color:rgb(31 41 55 / var(--tw-text-opacity, 1))}.text-green-600{--tw-text-opacity:1;color:rgb(22 163 74 / var(--tw-text-opacity, 1))}.text-green-800{--tw-text-opacity:1;color:rgb(22 101 52 / var(--tw-text-opacity, 1))}.text-purple-600{--tw-text-opacity:1;color:rgb(147 51 234 / var(--tw-text-opacity, 1))}.text-red-600{--tw-text-opacity:1;color:rgb(220 38 38 / var(--tw-text-opacity, 1))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.text-blue-800{--tw-text-opacity:1;color:rgb(30 64 175 / var(--tw-text-opacity, 1))}.text-gray-400{--tw-text-opacity:1;color:rgb(156 163 175 / var(--tw-text-opacity, 1))}.text-green-500{--tw-text-opacity:1;color:rgb(34 197 94 / var(--tw-text-opacity, 1))}.text-purple-800{--tw-text-opacity:1;color:rgb(107 33 168 / var(--tw-text-opacity, 1))}.text-yellow-600{--tw-text-opacity:1;color:rgb(202 138 4 / var(--tw-text-opacity, 1))}.shadow-md{--tw-shadow:0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-xl{--tw-shadow:0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.transition{transition-property:color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.duration-300{transition-duration:300ms}.hover\:bg-blue-700:hover{--tw-bg-opacity:1;background-color:rgb(29 78 216 / var(--tw-bg-opacity, 1))}.hover\:bg-gray-200:hover{--tw-bg-opacity:1;background-color:rgb(229 231 235 / var(--tw-bg-opacity, 1))}.hover\:text-blue-600:hover{--tw-text-opacity:1;color:rgb(37 99 235 / var(--tw-text-opacity, 1))}.hover\:text-blue-800:hover{--tw-text-opacity:1;color:rgb(30 64 175 / var(--tw-text-opacity, 1))}.hover\:text-gray-600:hover{--tw-text-opacity:1;color:rgb(75 85 99 / var(--tw-text-opacity, 1))}@media (min-width: 768px){.md\:mb-0{margin-bottom:0px}.md\:mt-0{margin-top:0px}.md\:flex{display:flex}.md\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.md\:flex-row{flex-direction:row}.md\:items-center{align-items:center}.md\:px-12{padding-left:3rem;padding-right:3rem}}@media (min-width: 1024px){.lg\:col-span-2{grid-column:span 2 / span 2}.lg\:col-span-1{grid-column:span 1 / span 1}.lg\:grid-cols-3{grid-template-columns:repeat(3, minmax(0, 1fr))}}</style><captcha-widgets></captcha-widgets><script src="chrome-extension://ojaffphbffmdaicdkahnmihipclmepok/static/js/workers.min.js"></script></head>
+<body>
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md py-4 px-6 md:px-12">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="h-10 w-10 bg-blue-600 rounded-lg flex items-center justify-center">
+                    <span class="text-white font-bold text-xl">1337</span>
+                </div>
+                <span class="font-bold text-xl text-gray-800">Collaboration Hub</span>
+            </div>
+            <div class="hidden md:flex space-x-8">
+                <a href="page1.html" class="text-gray-600 hover:text-blue-600 font-medium">Home</a>
+                <a href="page2.html" class="text-gray-600 hover:text-blue-600 font-medium">Exercises</a>
+                <a href="page4.html" class="text-blue-600 border-b-2 border-blue-600 font-medium">Voice Rooms</a>
+                <a href="page5.html" class="text-gray-600 hover:text-blue-600 font-medium">Pool Tests</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <div class="h-8 w-8 bg-blue-100 rounded-full flex items-center justify-center">
+                    <span class="text-blue-600 font-medium text-sm">JS</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto py-8 px-6 md:px-12">
+        <!-- Header -->
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
+            <div>
+                <h1 class="text-3xl font-bold text-gray-800 mb-2">Voice Rooms</h1>
+                <p class="text-gray-600">Join voice rooms to collaborate, study together, and help each other.</p>
+            </div>
+            <div class="mt-4 md:mt-0">
+                <button id="createRoomBtn" class="bg-blue-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-blue-700 transition duration-300 flex items-center">
+                    <i class="fas fa-plus mr-2"></i> Create Room
+                </button>
+            </div>
+        </div>
+
+        <!-- Status Bar -->
+        <div class="bg-white rounded-xl shadow-md p-4 mb-8 flex flex-col md:flex-row justify-between items-center">
+            <div class="flex items-center mb-4 md:mb-0">
+                <div class="h-3 w-3 bg-green-500 rounded-full mr-2"></div>
+                <span class="text-gray-700 font-medium">42 students online</span>
+                <span class="mx-4 text-gray-300">|</span>
+                <span class="text-gray-700">4 active rooms</span>
+            </div>
+            <div class="flex items-center">
+                <span class="text-gray-700 mr-3">Currently online:</span>
+                <div class="flex -space-x-2">
+                    <div class="user-avatar h-8 w-8 rounded-full bg-red-100 flex items-center justify-center border-2 border-white" title="Ahmed M.">
+                        <span class="text-red-600 font-medium text-xs">AM</span>
+                    </div>
+                    <div class="user-avatar h-8 w-8 rounded-full bg-blue-100 flex items-center justify-center border-2 border-white" title="Sara L.">
+                        <span class="text-blue-600 font-medium text-xs">SL</span>
+                    </div>
+                    <div class="user-avatar h-8 w-8 rounded-full bg-green-100 flex items-center justify-center border-2 border-white" title="Omar K.">
+                        <span class="text-green-600 font-medium text-xs">OK</span>
+                    </div>
+                    <div class="user-avatar h-8 w-8 rounded-full bg-purple-100 flex items-center justify-center border-2 border-white" title="Layla N.">
+                        <span class="text-purple-600 font-medium text-xs">LN</span>
+                    </div>
+                    <div class="user-avatar h-8 w-8 rounded-full bg-gray-200 flex items-center justify-center border-2 border-white" title="38 more">
+                        <span class="text-gray-600 font-medium text-xs">+38</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Voice Rooms Section -->
+            <div class="lg:col-span-2">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-6">Study Rooms</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Room 1 -->
+                    <div class="room-card bg-white rounded-xl shadow-md overflow-hidden cursor-pointer" data-room="shell">
+                        <div class="bg-blue-50 p-4 flex justify-between items-center">
+                            <div class="flex items-center">
+                                <div class="text-3xl mr-3">🧠</div>
+                                <a href = "https://discord.com/channels/1364213435197423736/1365431583368151080"  class="font-semibold text-gray-800">Shell Study Room</h3>
+                            </div>
+                            <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">Active</span>
+                        </div>
+                        <div class="p-4">
+                            <p class="text-gray-600 mb-4">Discuss shell scripting, commands, and automation techniques.</p>
+                            <div class="flex justify-between items-center">
+                                <div class="flex items-center">
+                                    <div class="flex -space-x-2">
+                                        <div class="h-7 w-7 rounded-full bg-blue-100 flex items-center justify-center border-2 border-white">
+                                            <span class="text-blue-600 font-medium text-xs">SL</span>
+                                        </div>
+                                        <div class="h-7 w-7 rounded-full bg-green-100 flex items-center justify-center border-2 border-white">
+                                            <span class="text-green-600 font-medium text-xs">OK</span>
+                                        </div>
+                                        <div class="h-7 w-7 rounded-full bg-gray-200 flex items-center justify-center border-2 border-white">
+                                            <span class="text-gray-600 font-medium text-xs">+3</span>
+                                        </div>
+                                    </div>
+                                    <span class="ml-2 text-sm text-gray-500">5 members</span>
+                                </div>
+                                <div class="flex items-center text-sm text-gray-500">
+                                    <i class="fas fa-headset mr-1"></i>
+                                    <span>Discord</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Room 2 -->
+                    <div class="room-card bg-white rounded-xl shadow-md overflow-hidden cursor-pointer" data-room="git">
+                        <div class="bg-purple-50 p-4 flex justify-between items-center">
+                            <div class="flex items-center">
+                                <div class="text-3xl mr-3">📦</div>
+                                <h3 class="font-semibold text-gray-800">Git Room</h3>
+                            </div>
+                            <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">Active</span>
+                        </div>
+                        <div class="p-4">
+                            <p class="text-gray-600 mb-4">Learn Git commands, workflows, and collaboration techniques.</p>
+                            <div class="flex justify-between items-center">
+                                <div class="flex items-center">
+                                    <div class="flex -space-x-2">
+                                        <div class="h-7 w-7 rounded-full bg-red-100 flex items-center justify-center border-2 border-white">
+                                            <span class="text-red-600 font-medium text-xs">AM</span>
+                                        </div>
+                                        <div class="h-7 w-7 rounded-full bg-purple-100 flex items-center justify-center border-2 border-white">
+                                            <span class="text-purple-600 font-medium text-xs">LN</span>
+                                        </div>
+                                    </div>
+                                    <span class="ml-2 text-sm text-gray-500">2 members</span>
+                                </div>
+                                <div class="flex items-center text-sm text-gray-500">
+                                    <i class="fas fa-headset mr-1"></i>
+                                    <span>Discord</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Room 3 -->
+                    <div class="room-card bg-white rounded-xl shadow-md overflow-hidden cursor-pointer" data-room="piscine">
+                        <div class="bg-yellow-50 p-4 flex justify-between items-center">
+                            <div class="flex items-center">
+                                <div class="text-3xl mr-3">🧪</div>
+                                <h3 class="font-semibold text-gray-800">C Piscine Room</h3>
+                            </div>
+                            <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">Active</span>
+                        </div>
+                        <div class="p-4">
+                            <p class="text-gray-600 mb-4">Prepare for the C piscine with exercises and peer support.</p>
+                            <div class="flex justify-between items-center">
+                                <div class="flex items-center">
+                                    <div class="flex -space-x-2">
+                                        <div class="h-7 w-7 rounded-full bg-green-100 flex items-center justify-center border-2 border-white">
+                                            <span class="text-green-600 font-medium text-xs">OK</span>
+                                        </div>
+                                        <div class="h-7 w-7 rounded-full bg-gray-200 flex items-center justify-center border-2 border-white">
+                                            <span class="text-gray-600 font-medium text-xs">+8</span>
+                                        </div>
+                                    </div>
+                                    <span class="ml-2 text-sm text-gray-500">9 members</span>
+                                </div>
+                                <div class="flex items-center text-sm text-gray-500">
+                                    <i class="fas fa-headset mr-1"></i>
+                                    <span>Discord</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Room 4 -->
+                    <div class="room-card bg-white rounded-xl shadow-md overflow-hidden cursor-pointer" data-room="help">
+                        <div class="bg-green-50 p-4 flex justify-between items-center">
+                            <div class="flex items-center">
+                                <div class="text-3xl mr-3">💬</div>
+                                <h3 class="font-semibold text-gray-800">Help &amp; Q&amp;A</h3>
+                            </div>
+                            <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">Active</span>
+                        </div>
+                        <div class="p-4">
+                            <p class="text-gray-600 mb-4">Get help with any topic or question from fellow students.</p>
+                            <div class="flex justify-between items-center">
+                                <div class="flex items-center">
+                                    <div class="flex -space-x-2">
+                                        <div class="h-7 w-7 rounded-full bg-blue-100 flex items-center justify-center border-2 border-white">
+                                            <span class="text-blue-600 font-medium text-xs">SL</span>
+                                        </div>
+                                        <div class="h-7 w-7 rounded-full bg-red-100 flex items-center justify-center border-2 border-white">
+                                            <span class="text-red-600 font-medium text-xs">AM</span>
+                                        </div>
+                                        <div class="h-7 w-7 rounded-full bg-gray-200 flex items-center justify-center border-2 border-white">
+                                            <span class="text-gray-600 font-medium text-xs">+4</span>
+                                        </div>
+                                    </div>
+                                    <span class="ml-2 text-sm text-gray-500">6 members</span>
+                                </div>
+                                <div class="flex items-center text-sm text-gray-500">
+                                    <i class="fas fa-headset mr-1"></i>
+                                    <span>Discord</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Schedule Section -->
+                <div class="mt-10">
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-6">Upcoming Sessions</h2>
+                    
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                        <div class="p-6">
+                            <div class="mb-6 pb-6 border-b border-gray-100">
+                                <div class="flex justify-between items-start mb-2">
+                                    <div class="flex items-center">
+                                        <div class="text-2xl mr-3">📚</div>
+                                        <h3 class="font-semibold text-gray-800">Advanced C Programming Workshop</h3>
+                                    </div>
+                                    <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">Tomorrow</span>
+                                </div>
+                                <p class="text-gray-600 mb-3">Deep dive into memory management, pointers, and data structures in C.</p>
+                                <div class="flex items-center text-sm text-gray-500">
+                                    <i class="far fa-clock mr-1"></i>
+                                    <span>15:00 - 17:00 GMT</span>
+                                    <span class="mx-2">•</span>
+                                    <span>Host: Mohammed K.</span>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-6 pb-6 border-b border-gray-100">
+                                <div class="flex justify-between items-start mb-2">
+                                    <div class="flex items-center">
+                                        <div class="text-2xl mr-3">🔍</div>
+                                        <h3 class="font-semibold text-gray-800">Git &amp; GitHub Crash Course</h3>
+                                    </div>
+                                    <span class="bg-purple-100 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded">In 2 days</span>
+                                </div>
+                                <p class="text-gray-600 mb-3">Learn essential Git commands and GitHub collaboration workflows.</p>
+                                <div class="flex items-center text-sm text-gray-500">
+                                    <i class="far fa-clock mr-1"></i>
+                                    <span>18:00 - 19:30 GMT</span>
+                                    <span class="mx-2">•</span>
+                                    <span>Host: Sara L.</span>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <div class="flex justify-between items-start mb-2">
+                                    <div class="flex items-center">
+                                        <div class="text-2xl mr-3">🏊</div>
+                                        <h3 class="font-semibold text-gray-800">Piscine Preparation Session</h3>
+                                    </div>
+                                    <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">In 3 days</span>
+                                </div>
+                                <p class="text-gray-600 mb-3">Get ready for the piscine with tips, tricks, and practice exercises.</p>
+                                <div class="flex items-center text-sm text-gray-500">
+                                    <i class="far fa-clock mr-1"></i>
+                                    <span>14:00 - 16:00 GMT</span>
+                                    <span class="mx-2">•</span>
+                                    <span>Host: Ahmed M.</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-gray-50 p-4 text-center">
+                            <button class="text-blue-600 font-medium hover:text-blue-800">
+                                View All Scheduled Sessions <i class="fas fa-arrow-right ml-1"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Pomodoro Timer Section -->
+            <div class="lg:col-span-1">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-6">Pomodoro Timer</h2>
+                
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <div class="flex flex-col items-center">
+                        <!-- Timer Circle -->
+                        <div class="relative mb-6">
+                            <svg class="progress-ring" width="200" height="200">
+                                <circle class="progress-ring__circle-bg" stroke="#e5e7eb" stroke-width="8" fill="transparent" r="90" cx="100" cy="100"></circle>
+                                <circle id="progressRing" class="progress-ring__circle" stroke="#3b82f6" stroke-width="8" fill="transparent" r="90" cx="100" cy="100" stroke-dashoffset="283" style="stroke-dashoffset: 0; stroke-dasharray: 565.487;"></circle>
+                            </svg>
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div id="timerDisplay" class="timer-display">15:00</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Timer Mode Selector -->
+                        <div class="flex space-x-2 mb-6">
+                            <button id="pomodoroBtn" class="px-4 py-2 rounded-lg text-sm font-medium bg-gray-200 text-gray-700">Pomodoro</button>
+                            <button id="shortBreakBtn" class="px-4 py-2 rounded-lg text-sm font-medium bg-gray-200 text-gray-700">Short Break</button>
+                            <button id="longBreakBtn" class="px-4 py-2 rounded-lg text-sm font-medium bg-blue-600 text-white">Long Break</button>
+                        </div>
+                        
+                        <!-- Timer Controls -->
+                        <div class="flex space-x-4 mb-6">
+                            <button id="startBtn" class="timer-button bg-blue-600 text-white h-12 w-12 rounded-full flex items-center justify-center">
+                                <i class="fas fa-play"></i>
+                            </button>
+                            <button id="pauseBtn" class="timer-button bg-yellow-500 text-white h-12 w-12 rounded-full flex items-center justify-center hidden">
+                                <i class="fas fa-pause"></i>
+                            </button>
+                            <button id="resetBtn" class="timer-button bg-gray-200 text-gray-700 h-12 w-12 rounded-full flex items-center justify-center">
+                                <i class="fas fa-redo-alt"></i>
+                            </button>
+                        </div>
+                        
+                        <!-- Session Counter -->
+                        <div class="text-center mb-6">
+                            <p class="text-gray-600 mb-2">Completed Sessions</p>
+                            <div class="flex justify-center space-x-2">
+                                <span id="session1" class="h-3 w-3 rounded-full bg-blue-600"></span>
+                                <span id="session2" class="h-3 w-3 rounded-full bg-gray-300"></span>
+                                <span id="session3" class="h-3 w-3 rounded-full bg-gray-300"></span>
+                                <span id="session4" class="h-3 w-3 rounded-full bg-gray-300"></span>
+                            </div>
+                        </div>
+                        
+                        <!-- Timer Info -->
+                        <div class="bg-blue-50 p-4 rounded-lg w-full">
+                            <h4 class="font-medium text-gray-800 mb-2">Pomodoro Technique</h4>
+                            <p class="text-sm text-gray-600">Work for 25 minutes, then take a 5-minute break. After 4 pomodoros, take a longer 15-minute break.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Room Guidelines -->
+                <div class="bg-white rounded-xl shadow-md p-6 mt-6">
+                    <h3 class="font-semibold text-gray-800 mb-4">Room Guidelines</h3>
+                    <ul class="space-y-3 text-gray-600 text-sm">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>Be respectful and supportive to all participants.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>Keep your microphone muted when not speaking.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>Use the Pomodoro timer to structure group study sessions.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>Share your screen when explaining concepts or code.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Join Room Modal -->
+    <div id="joinRoomModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-xl shadow-xl max-w-md w-full mx-4">
+            <div id="modalHeader" class="p-6 border-b border-gray-200 bg-yellow-50">
+                <div class="flex justify-between items-center">
+                    <div class="flex items-center">
+                        <div id="modalEmoji" class="text-3xl mr-3">🧪</div>
+                        <h3 id="modalTitle" class="text-xl font-semibold text-gray-800">C Piscine Room</h3>
+                    </div>
+                    <button id="closeModalBtn" class="text-gray-400 hover:text-gray-600">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="p-6">
+                <div class="mb-6">
+                    <h4 class="font-medium text-gray-800 mb-2">Current Members (5)</h4>
+                    <div class="flex flex-wrap gap-2">
+                        <div class="flex items-center bg-gray-100 rounded-full px-3 py-1">
+                            <div class="h-6 w-6 rounded-full bg-blue-100 flex items-center justify-center mr-2">
+                                <span class="text-blue-600 font-medium text-xs">SL</span>
+                            </div>
+                            <span class="text-sm text-gray-700">Sara L.</span>
+                        </div>
+                        <div class="flex items-center bg-gray-100 rounded-full px-3 py-1">
+                            <div class="h-6 w-6 rounded-full bg-green-100 flex items-center justify-center mr-2">
+                                <span class="text-green-600 font-medium text-xs">OK</span>
+                            </div>
+                            <span class="text-sm text-gray-700">Omar K.</span>
+                        </div>
+                        <div class="flex items-center bg-gray-100 rounded-full px-3 py-1">
+                            <div class="h-6 w-6 rounded-full bg-yellow-100 flex items-center justify-center mr-2">
+                                <span class="text-yellow-600 font-medium text-xs">MH</span>
+                            </div>
+                            <span class="text-sm text-gray-700">Maryam H.</span>
+                        </div>
+                        <div class="flex items-center bg-gray-100 rounded-full px-3 py-1">
+                            <div class="h-6 w-6 rounded-full bg-purple-100 flex items-center justify-center mr-2">
+                                <span class="text-purple-600 font-medium text-xs">YT</span>
+                            </div>
+                            <span class="text-sm text-gray-700">Yousef T.</span>
+                        </div>
+                        <div class="flex items-center bg-gray-100 rounded-full px-3 py-1">
+                            <div class="h-6 w-6 rounded-full bg-red-100 flex items-center justify-center mr-2">
+                                <span class="text-red-600 font-medium text-xs">LK</span>
+                            </div>
+                            <span class="text-sm text-gray-700">Laila K.</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mb-6">
+                    <h4 class="font-medium text-gray-800 mb-2">Current Topic</h4>
+                    <p class="text-gray-600">Shell scripting basics: loops, conditionals, and file operations.</p>
+                </div>
+                
+                <div class="bg-blue-50 p-4 rounded-lg mb-6">
+                    <div class="flex items-start">
+                        <i class="fas fa-info-circle text-blue-600 mt-1 mr-2"></i>
+                        <p class="text-sm text-gray-700">This room is hosted on Discord. Click the button below to join the voice channel.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="p-6 border-t border-gray-200 flex justify-end">
+                <button id="cancelJoinBtn" class="bg-gray-100 text-gray-700 px-6 py-2 rounded-lg font-medium hover:bg-gray-200 transition duration-300 mr-2">Cancel</button>
+                <button id="joinDiscordBtn" class="discord-button text-white px-6 py-2 rounded-lg font-medium transition duration-300 flex items-center">
+                    <i class="fab fa-discord mr-2"></i> Join Discord Channel
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Room cards functionality
+        const roomCards = document.querySelectorAll('.room-card');
+        const joinRoomModal = document.getElementById('joinRoomModal');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const cancelJoinBtn = document.getElementById('cancelJoinBtn');
+        const modalEmoji = document.getElementById('modalEmoji');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalHeader = document.getElementById('modalHeader');
+        
+        const roomData = {
+            shell: {
+                emoji: '🧠',
+                title: 'Shell Study Room',
+                headerClass: 'bg-blue-50'
+            },
+            git: {
+                emoji: '📦',
+                title: 'Git Room',
+                headerClass: 'bg-purple-50'
+            },
+            piscine: {
+                emoji: '🧪',
+                title: 'C Piscine Room',
+                headerClass: 'bg-yellow-50'
+            },
+            help: {
+                emoji: '💬',
+                title: 'Help & Q&A',
+                headerClass: 'bg-green-50'
+            }
+        };
+        
+        roomCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const roomType = card.dataset.room;
+                const room = roomData[roomType];
+                
+                modalEmoji.textContent = room.emoji;
+                modalTitle.textContent = room.title;
+                modalHeader.className = `p-6 border-b border-gray-200 ${room.headerClass}`;
+                
+                joinRoomModal.classList.remove('hidden');
+            });
+        });
+        
+        closeModalBtn.addEventListener('click', () => {
+            joinRoomModal.classList.add('hidden');
+        });
+        
+        cancelJoinBtn.addEventListener('click', () => {
+            joinRoomModal.classList.add('hidden');
+        });
+        
+        // Pomodoro Timer functionality
+        const timerDisplay = document.getElementById('timerDisplay');
+        const progressRing = document.getElementById('progressRing');
+        const startBtn = document.getElementById('startBtn');
+        const pauseBtn = document.getElementById('pauseBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const pomodoroBtn = document.getElementById('pomodoroBtn');
+        const shortBreakBtn = document.getElementById('shortBreakBtn');
+        const longBreakBtn = document.getElementById('longBreakBtn');
+        const sessionMarkers = [
+            document.getElementById('session1'),
+            document.getElementById('session2'),
+            document.getElementById('session3'),
+            document.getElementById('session4')
+        ];
+        
+        let timer;
+        let timeLeft;
+        let totalTime;
+        let isRunning = false;
+        let completedSessions = 0;
+        
+        const POMODORO_TIME = 25 * 60; // 25 minutes
+        const SHORT_BREAK_TIME = 5 * 60; // 5 minutes
+        const LONG_BREAK_TIME = 15 * 60; // 15 minutes
+        
+        function setTimer(seconds) {
+            clearInterval(timer);
+            isRunning = false;
+            timeLeft = seconds;
+            totalTime = seconds;
+            updateTimerDisplay();
+            updateProgressRing();
+            
+            startBtn.classList.remove('hidden');
+            pauseBtn.classList.add('hidden');
+        }
+        
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+        
+        function updateProgressRing() {
+            const circumference = 2 * Math.PI * 90;
+            const offset = circumference - (timeLeft / totalTime) * circumference;
+            progressRing.style.strokeDashoffset = offset;
+        }
+        
+        function startTimer() {
+            if (isRunning) return;
+            
+            isRunning = true;
+            startBtn.classList.add('hidden');
+            pauseBtn.classList.remove('hidden');
+            
+            timer = setInterval(() => {
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    isRunning = false;
+                    
+                    // Play notification sound (would be implemented in a real app)
+                    
+                    // If it was a pomodoro session, mark it as completed
+                    if (pomodoroBtn.classList.contains('bg-blue-600')) {
+                        completeSession();
+                    }
+                    
+                    return;
+                }
+                
+                timeLeft--;
+                updateTimerDisplay();
+                updateProgressRing();
+            }, 1000);
+        }
+        
+        function pauseTimer() {
+            clearInterval(timer);
+            isRunning = false;
+            startBtn.classList.remove('hidden');
+            pauseBtn.classList.add('hidden');
+        }
+        
+        function resetTimer() {
+            setTimer(totalTime);
+        }
+        
+        function completeSession() {
+            if (completedSessions < 4) {
+                sessionMarkers[completedSessions].classList.remove('bg-gray-300');
+                sessionMarkers[completedSessions].classList.add('bg-blue-600');
+                completedSessions++;
+                
+                // Automatically switch to break
+                if (completedSessions < 4) {
+                    setShortBreak();
+                } else {
+                    setLongBreak();
+                }
+            }
+        }
+        
+        function setPomodoro() {
+            setTimer(POMODORO_TIME);
+            pomodoroBtn.classList.add('bg-blue-600', 'text-white');
+            pomodoroBtn.classList.remove('bg-gray-200', 'text-gray-700');
+            shortBreakBtn.classList.add('bg-gray-200', 'text-gray-700');
+            shortBreakBtn.classList.remove('bg-blue-600', 'text-white');
+            longBreakBtn.classList.add('bg-gray-200', 'text-gray-700');
+            longBreakBtn.classList.remove('bg-blue-600', 'text-white');
+        }
+        
+        function setShortBreak() {
+            setTimer(SHORT_BREAK_TIME);
+            shortBreakBtn.classList.add('bg-blue-600', 'text-white');
+            shortBreakBtn.classList.remove('bg-gray-200', 'text-gray-700');
+            pomodoroBtn.classList.add('bg-gray-200', 'text-gray-700');
+            pomodoroBtn.classList.remove('bg-blue-600', 'text-white');
+            longBreakBtn.classList.add('bg-gray-200', 'text-gray-700');
+            longBreakBtn.classList.remove('bg-blue-600', 'text-white');
+        }
+        
+        function setLongBreak() {
+            setTimer(LONG_BREAK_TIME);
+            longBreakBtn.classList.add('bg-blue-600', 'text-white');
+            longBreakBtn.classList.remove('bg-gray-200', 'text-gray-700');
+            pomodoroBtn.classList.add('bg-gray-200', 'text-gray-700');
+            pomodoroBtn.classList.remove('bg-blue-600', 'text-white');
+            shortBreakBtn.classList.add('bg-gray-200', 'text-gray-700');
+            shortBreakBtn.classList.remove('bg-blue-600', 'text-white');
+        }
+        
+        // Initialize timer
+        setPomodoro();
+        
+        // Event listeners
+        startBtn.addEventListener('click', startTimer);
+        pauseBtn.addEventListener('click', pauseTimer);
+        resetBtn.addEventListener('click', resetTimer);
+        pomodoroBtn.addEventListener('click', setPomodoro);
+        shortBreakBtn.addEventListener('click', setShortBreak);
+        longBreakBtn.addEventListener('click', setLongBreak);
+        
+        // Initialize progress ring
+        progressRing.style.strokeDasharray = 2 * Math.PI * 90;
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'952f45c29244215f',t:'MTc1MDQ2NDUxNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><iframe height="1" width="1" style="position: absolute; top: 0px; left: 0px; border: none; visibility: hidden;"></iframe>
+
+</body></html>
