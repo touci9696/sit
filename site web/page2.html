@@ -1,0 +1,451 @@
+<html lang="en"><head><script src="chrome-extension://infdcenbdoibcacogknkjleclhnjdmfh/content/captcha/recaptcha/hunter.js"></script><script src="chrome-extension://infdcenbdoibcacogknkjleclhnjdmfh/content/captcha/recaptcha/interceptor.js"></script><script src="chrome-extension://infdcenbdoibcacogknkjleclhnjdmfh/content/communication_helpers.js"></script><script src="chrome-extension://infdcenbdoibcacogknkjleclhnjdmfh/content/core_helpers.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercises - tc Collaboration Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8fafc;
+        }
+        .exercise-card {
+            transition: all 0.2s ease;
+        }
+        .exercise-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .category-tab.active {
+            background-color: #3b82f6;
+            color: white;
+        }
+        .answer-card {
+            transition: all 0.2s ease;
+        }
+        .answer-card:hover {
+            background-color: #f9fafb;
+        }
+    </style>
+<style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.16 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.inset-0{inset:0px}.left-3{left:0.75rem}.top-3{top:0.75rem}.z-50{z-index:50}.mx-4{margin-left:1rem;margin-right:1rem}.mx-auto{margin-left:auto;margin-right:auto}.my-1{margin-top:0.25rem;margin-bottom:0.25rem}.mb-2{margin-bottom:0.5rem}.mb-3{margin-bottom:0.75rem}.mb-4{margin-bottom:1rem}.mb-8{margin-bottom:2rem}.ml-1{margin-left:0.25rem}.ml-2{margin-left:0.5rem}.mr-1{margin-right:0.25rem}.mr-2{margin-right:0.5rem}.mr-4{margin-right:1rem}.mt-10{margin-top:2.5rem}.mt-2{margin-top:0.5rem}.mt-3{margin-top:0.75rem}.mt-4{margin-top:1rem}.block{display:block}.flex{display:flex}.inline-flex{display:inline-flex}.hidden{display:none}.h-10{height:2.5rem}.h-32{height:8rem}.h-8{height:2rem}.w-10{width:2.5rem}.w-8{width:2rem}.w-full{width:100%}.max-w-2xl{max-width:42rem}.max-w-7xl{max-width:80rem}.flex-1{flex:1 1 0%}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.items-start{align-items:flex-start}.items-end{align-items:flex-end}.items-center{align-items:center}.justify-end{justify-content:flex-end}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-2{gap:0.5rem}.space-x-2 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(0.5rem * var(--tw-space-x-reverse));margin-left:calc(0.5rem * calc(1 - var(--tw-space-x-reverse)))}.space-x-4 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(1rem * var(--tw-space-x-reverse));margin-left:calc(1rem * calc(1 - var(--tw-space-x-reverse)))}.space-x-8 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(2rem * var(--tw-space-x-reverse));margin-left:calc(2rem * calc(1 - var(--tw-space-x-reverse)))}.space-y-6 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.5rem * var(--tw-space-y-reverse))}.overflow-hidden{overflow:hidden}.overflow-x-auto{overflow-x:auto}.rounded{border-radius:0.25rem}.rounded-full{border-radius:9999px}.rounded-lg{border-radius:0.5rem}.rounded-md{border-radius:0.375rem}.rounded-xl{border-radius:0.75rem}.rounded-l-md{border-top-left-radius:0.375rem;border-bottom-left-radius:0.375rem}.rounded-r-md{border-top-right-radius:0.375rem;border-bottom-right-radius:0.375rem}.border{border-width:1px}.border-b{border-bottom-width:1px}.border-b-2{border-bottom-width:2px}.border-t{border-top-width:1px}.border-blue-600{--tw-border-opacity:1;border-color:rgb(37 99 235 / var(--tw-border-opacity, 1))}.border-gray-100{--tw-border-opacity:1;border-color:rgb(243 244 246 / var(--tw-border-opacity, 1))}.border-gray-200{--tw-border-opacity:1;border-color:rgb(229 231 235 / var(--tw-border-opacity, 1))}.border-gray-300{--tw-border-opacity:1;border-color:rgb(209 213 219 / var(--tw-border-opacity, 1))}.bg-black{--tw-bg-opacity:1;background-color:rgb(0 0 0 / var(--tw-bg-opacity, 1))}.bg-blue-100{--tw-bg-opacity:1;background-color:rgb(219 234 254 / var(--tw-bg-opacity, 1))}.bg-blue-600{--tw-bg-opacity:1;background-color:rgb(37 99 235 / var(--tw-bg-opacity, 1))}.bg-gray-100{--tw-bg-opacity:1;background-color:rgb(243 244 246 / var(--tw-bg-opacity, 1))}.bg-gray-200{--tw-bg-opacity:1;background-color:rgb(229 231 235 / var(--tw-bg-opacity, 1))}.bg-gray-50{--tw-bg-opacity:1;background-color:rgb(249 250 251 / var(--tw-bg-opacity, 1))}.bg-green-100{--tw-bg-opacity:1;background-color:rgb(220 252 231 / var(--tw-bg-opacity, 1))}.bg-purple-100{--tw-bg-opacity:1;background-color:rgb(243 232 255 / var(--tw-bg-opacity, 1))}.bg-white{--tw-bg-opacity:1;background-color:rgb(255 255 255 / var(--tw-bg-opacity, 1))}.bg-yellow-100{--tw-bg-opacity:1;background-color:rgb(254 249 195 / var(--tw-bg-opacity, 1))}.bg-opacity-50{--tw-bg-opacity:0.5}.p-3{padding:0.75rem}.p-4{padding:1rem}.p-6{padding:1.5rem}.px-2\.5{padding-left:0.625rem;padding-right:0.625rem}.px-3{padding-left:0.75rem;padding-right:0.75rem}.px-4{padding-left:1rem;padding-right:1rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.py-0\.5{padding-top:0.125rem;padding-bottom:0.125rem}.py-1{padding-top:0.25rem;padding-bottom:0.25rem}.py-2{padding-top:0.5rem;padding-bottom:0.5rem}.py-4{padding-top:1rem;padding-bottom:1rem}.py-8{padding-top:2rem;padding-bottom:2rem}.pl-10{padding-left:2.5rem}.pr-4{padding-right:1rem}.pt-3{padding-top:0.75rem}.text-center{text-align:center}.font-mono{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace}.text-3xl{font-size:1.875rem;line-height:2.25rem}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-xs{font-size:0.75rem;line-height:1rem}.font-bold{font-weight:700}.font-medium{font-weight:500}.font-semibold{font-weight:600}.text-blue-600{--tw-text-opacity:1;color:rgb(37 99 235 / var(--tw-text-opacity, 1))}.text-blue-800{--tw-text-opacity:1;color:rgb(30 64 175 / var(--tw-text-opacity, 1))}.text-gray-400{--tw-text-opacity:1;color:rgb(156 163 175 / var(--tw-text-opacity, 1))}.text-gray-500{--tw-text-opacity:1;color:rgb(107 114 128 / var(--tw-text-opacity, 1))}.text-gray-600{--tw-text-opacity:1;color:rgb(75 85 99 / var(--tw-text-opacity, 1))}.text-gray-700{--tw-text-opacity:1;color:rgb(55 65 81 / var(--tw-text-opacity, 1))}.text-gray-800{--tw-text-opacity:1;color:rgb(31 41 55 / var(--tw-text-opacity, 1))}.text-green-600{--tw-text-opacity:1;color:rgb(22 163 74 / var(--tw-text-opacity, 1))}.text-green-800{--tw-text-opacity:1;color:rgb(22 101 52 / var(--tw-text-opacity, 1))}.text-purple-800{--tw-text-opacity:1;color:rgb(107 33 168 / var(--tw-text-opacity, 1))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.text-yellow-800{--tw-text-opacity:1;color:rgb(133 77 14 / var(--tw-text-opacity, 1))}.shadow{--tw-shadow:0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-md{--tw-shadow:0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-xl{--tw-shadow:0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.transition{transition-property:color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.duration-300{transition-duration:300ms}.hover\:bg-blue-700:hover{--tw-bg-opacity:1;background-color:rgb(29 78 216 / var(--tw-bg-opacity, 1))}.hover\:bg-gray-200:hover{--tw-bg-opacity:1;background-color:rgb(229 231 235 / var(--tw-bg-opacity, 1))}.hover\:bg-gray-300:hover{--tw-bg-opacity:1;background-color:rgb(209 213 219 / var(--tw-bg-opacity, 1))}.hover\:bg-gray-50:hover{--tw-bg-opacity:1;background-color:rgb(249 250 251 / var(--tw-bg-opacity, 1))}.hover\:text-blue-600:hover{--tw-text-opacity:1;color:rgb(37 99 235 / var(--tw-text-opacity, 1))}.hover\:text-blue-800:hover{--tw-text-opacity:1;color:rgb(30 64 175 / var(--tw-text-opacity, 1))}.hover\:text-gray-600:hover{--tw-text-opacity:1;color:rgb(75 85 99 / var(--tw-text-opacity, 1))}.hover\:text-red-600:hover{--tw-text-opacity:1;color:rgb(220 38 38 / var(--tw-text-opacity, 1))}.focus\:border-blue-500:focus{--tw-border-opacity:1;border-color:rgb(59 130 246 / var(--tw-border-opacity, 1))}.focus\:outline-none:focus{outline:2px solid transparent;outline-offset:2px}.focus\:ring-2:focus{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)}.focus\:ring-blue-500:focus{--tw-ring-opacity:1;--tw-ring-color:rgb(59 130 246 / var(--tw-ring-opacity, 1))}@media (min-width: 768px){.md\:flex{display:flex}.md\:px-12{padding-left:3rem;padding-right:3rem}}</style><captcha-widgets></captcha-widgets><script src="chrome-extension://ojaffphbffmdaicdkahnmihipclmepok/static/js/workers.min.js"></script></head>
+<body>
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md py-4 px-6 md:px-12">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="h-10 w-10 bg-blue-600 rounded-lg flex items-center justify-center">
+                    <span class="text-white font-bold text-xl">tc</span>
+                </div>
+                <span class="font-bold text-xl text-gray-800">Collaboration Hub</span>
+            </div>
+            <div class="hidden md:flex space-x-8">
+                <a href="index.html" class="text-gray-600 hover:text-blue-600 font-medium">Home</a>
+                <a href="page2.html" class="text-blue-600 border-b-2 border-blue-600 font-medium">Exercises</a>
+                <a href="page4.html" class="text-gray-600 hover:text-blue-600 font-medium">Voice Rooms</a>
+                <a href="page5.html" class="text-gray-600 hover:text-blue-600 font-medium">Pool Tests</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <div class="relative">
+                    <input type="text" placeholder="Search exercises..." class="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                    <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                </div>
+                <div class="h-8 w-8 bg-blue-100 rounded-full flex items-center justify-center">
+                    <span class="text-blue-600 font-medium text-sm">JS</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto py-8 px-6 md:px-12">
+        <!-- Header -->
+        <div class="flex justify-between items-center mb-8">
+            <h1 class="text-3xl font-bold text-gray-800">Exercises</h1>
+            <button href="page3.html" id="addExerciseBtn" class="bg-blue-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-blue-700 transition duration-300 flex items-center">
+                <i class="fas fa-plus mr-2"></i> Add Exercise
+            </button>
+        </div>
+
+        <!-- Categories -->
+        <div class="mb-8">
+            <div class="flex flex-wrap gap-2">
+                <button class="category-tab active px-4 py-2 rounded-lg font-medium">All</button>
+                <button class="category-tab bg-gray-100 px-4 py-2 rounded-lg font-medium text-gray-700 hover:bg-gray-200">C</button>
+                <button class="category-tab bg-gray-100 px-4 py-2 rounded-lg font-medium text-gray-700 hover:bg-gray-200">Shell</button>
+                <button class="category-tab bg-gray-100 px-4 py-2 rounded-lg font-medium text-gray-700 hover:bg-gray-200">Piscine</button>
+                <button class="category-tab bg-gray-100 px-4 py-2 rounded-lg font-medium text-gray-700 hover:bg-gray-200">C++</button>
+                <button class="category-tab bg-gray-100 px-4 py-2 rounded-lg font-medium text-gray-700 hover:bg-gray-200">Python</button>
+                <button class="category-tab bg-gray-100 px-4 py-2 rounded-lg font-medium text-gray-700 hover:bg-gray-200">Web</button>
+            </div>
+        </div>
+
+        <!-- Exercise List -->
+        <div class="space-y-6">
+            <!-- Exercise 1 -->
+            <div class="exercise-card bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="p-6">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <div class="flex items-center mb-2">
+                                <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">C</span>
+                                <span class="bg-purple-100 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded ml-2">Piscine</span>
+                            </div>
+                            <h2 class="text-xl font-semibold text-gray-800 mb-2">ft_split Implementation</h2>
+                            <p class="text-gray-600 mb-4">How to properly implement the ft_split function that splits a string into an array of strings using a delimiter character.</p>
+                        </div>
+                        <div class="flex flex-col items-end">
+                            <div class="text-sm text-gray-500">Posted by <span class="font-medium text-gray-700">Ahmed</span></div>
+                            <div class="text-sm text-gray-500">2 days ago</div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center text-sm text-gray-500 mt-4">
+                        <div class="flex items-center mr-4">
+                            <i class="far fa-comment mr-1"></i>
+                            <span>4 answers</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="far fa-eye mr-1"></i>
+                            <span>32 views</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Answers Section -->
+                <div class="border-t border-gray-200 bg-gray-50 p-6">
+                    <h3 class="font-semibold text-gray-800 mb-4">Answers</h3>
+                    
+                    <!-- Answer 1 -->
+                    <div class="answer-card bg-white border border-gray-200 rounded-lg p-4 mb-4">
+                        <div class="flex">
+                            <!-- Voting -->
+                            <div class="flex flex-col items-center mr-4">
+                                <button class="text-gray-400 hover:text-blue-600">
+                                    <i class="fas fa-chevron-up"></i>
+                                </button>
+                                <span class="text-gray-700 font-medium my-1">24</span>
+                                <button class="text-gray-400 hover:text-red-600">
+                                    <i class="fas fa-chevron-down"></i>
+                                </button>
+                            </div>
+                            
+                            <!-- Answer Content -->
+                            <div class="flex-1">
+                                <div class="flex justify-between items-start mb-2">
+                                    <div class="flex items-center">
+                                        <div class="h-8 w-8 bg-green-100 rounded-full flex items-center justify-center mr-2">
+                                            <span class="text-green-600 font-medium text-sm">MK</span>
+                                        </div>
+                                        <span class="font-medium text-gray-800">Mohammed K.</span>
+                                        <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded ml-2">Top Contributor</span>
+                                    </div>
+                                    <span class="text-sm text-gray-500">1 day ago</span>
+                                </div>
+                                
+                                <div class="text-gray-700 mb-4">
+                                    <p>Here's how I implemented it:</p>
+                                    <pre class="bg-gray-100 p-3 rounded-lg mt-2 text-sm overflow-x-auto"><code>char **ft_split(char const *s, char c)
+{
+    // Count words
+    int word_count = 0;
+    int i = 0;
+    
+    while (s[i])
+    {
+        if (s[i] != c &amp;&amp; (s[i + 1] == c || s[i + 1] == '\0'))
+            word_count++;
+        i++;
+    }
+    
+    // Allocate memory
+    char **result = (char **)malloc(sizeof(char *) * (word_count + 1));
+    if (!result)
+        return (NULL);
+        
+    // Split logic here...
+    
+    return (result);
+}</code></pre>
+                                    <p class="mt-2">The key is to first count the words, then allocate memory for each word.</p>
+                                </div>
+                                
+                                <!-- Comments -->
+                                <div class="border-t border-gray-100 pt-3 mt-3">
+                                    <div class="text-sm text-gray-700 mb-2">
+                                        <span class="font-medium">Sara:</span> This helped me a lot, thanks!
+                                    </div>
+                                    <div class="text-sm text-gray-700 mb-3">
+                                        <span class="font-medium">Yousef:</span> Don't forget to handle the case when s is NULL.
+                                    </div>
+                                    
+                                    <!-- Add Comment -->
+                                    <div class="flex mt-2">
+                                        <input type="text" placeholder="Add a comment..." class="flex-1 border border-gray-300 rounded-lg px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                        <button class="ml-2 bg-gray-200 text-gray-700 px-3 py-1 rounded-lg text-sm hover:bg-gray-300">Post</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Answer 2 -->
+                    <div class="answer-card bg-white border border-gray-200 rounded-lg p-4">
+                        <div class="flex">
+                            <!-- Voting -->
+                            <div class="flex flex-col items-center mr-4">
+                                <button class="text-gray-400 hover:text-blue-600">
+                                    <i class="fas fa-chevron-up"></i>
+                                </button>
+                                <span class="text-gray-700 font-medium my-1">12</span>
+                                <button class="text-gray-400 hover:text-red-600">
+                                    <i class="fas fa-chevron-down"></i>
+                                </button>
+                            </div>
+                            
+                            <!-- Answer Content -->
+                            <div class="flex-1">
+                                <div class="flex justify-between items-start mb-2">
+                                    <div class="flex items-center">
+                                        <div class="h-8 w-8 bg-blue-100 rounded-full flex items-center justify-center mr-2">
+                                            <span class="text-blue-600 font-medium text-sm">LN</span>
+                                        </div>
+                                        <span class="font-medium text-gray-800">Layla N.</span>
+                                    </div>
+                                    <span class="text-sm text-gray-500">12 hours ago</span>
+                                </div>
+                                
+                                <div class="text-gray-700 mb-4">
+                                    <p>I found a more efficient approach by using a single loop:</p>
+                                    <pre class="bg-gray-100 p-3 rounded-lg mt-2 text-sm overflow-x-auto"><code>char **ft_split(char const *s, char c)
+{
+    // Implementation details...
+    
+    // The key is to handle edge cases properly
+    if (!s)
+        return (NULL);
+        
+    // Rest of the implementation...
+}</code></pre>
+                                    <p class="mt-2">Make sure to free all allocated memory if any allocation fails during the process.</p>
+                                </div>
+                                
+                                <!-- Comments -->
+                                <div class="border-t border-gray-100 pt-3 mt-3">
+                                    <div class="text-sm text-gray-700 mb-3">
+                                        <span class="font-medium">Ahmed:</span> Could you explain more about the memory management part?
+                                    </div>
+                                    
+                                    <!-- Add Comment -->
+                                    <div class="flex mt-2">
+                                        <input type="text" placeholder="Add a comment..." class="flex-1 border border-gray-300 rounded-lg px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                        <button class="ml-2 bg-gray-200 text-gray-700 px-3 py-1 rounded-lg text-sm hover:bg-gray-300">Post</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Add Answer Button -->
+                    <button class="mt-4 w-full bg-gray-100 text-gray-700 py-2 rounded-lg font-medium hover:bg-gray-200 transition duration-300 flex items-center justify-center">
+                        <i class="fas fa-plus mr-2"></i> Add Your Answer
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Exercise 2 -->
+            <div class="exercise-card bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="p-6">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <div class="flex items-center mb-2">
+                                <span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded">Shell</span>
+                            </div>
+                            <h2 class="text-xl font-semibold text-gray-800 mb-2">Shell Script for File Permissions</h2>
+                            <p class="text-gray-600 mb-4">How to write a shell script that recursively changes file permissions in a directory structure.</p>
+                        </div>
+                        <div class="flex flex-col items-end">
+                            <div class="text-sm text-gray-500">Posted by <span class="font-medium text-gray-700">Fatima</span></div>
+                            <div class="text-sm text-gray-500">1 week ago</div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center text-sm text-gray-500 mt-4">
+                        <div class="flex items-center mr-4">
+                            <i class="far fa-comment mr-1"></i>
+                            <span>2 answers</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="far fa-eye mr-1"></i>
+                            <span>18 views</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Collapsed Answers (Click to Expand) -->
+                <div class="border-t border-gray-200 bg-gray-50 p-4 text-center">
+                    <button class="text-blue-600 font-medium hover:text-blue-800">
+                        Show 2 answers <i class="fas fa-chevron-down ml-1"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Exercise 3 -->
+            <div class="exercise-card bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="p-6">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <div class="flex items-center mb-2">
+                                <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">C</span>
+                                <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded ml-2">Linked Lists</span>
+                            </div>
+                            <h2 class="text-xl font-semibold text-gray-800 mb-2">Implementing a Circular Linked List</h2>
+                            <p class="text-gray-600 mb-4">Need help with implementing a circular linked list in C with proper memory management.</p>
+                        </div>
+                        <div class="flex flex-col items-end">
+                            <div class="text-sm text-gray-500">Posted by <span class="font-medium text-gray-700">Omar</span></div>
+                            <div class="text-sm text-gray-500">3 days ago</div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center text-sm text-gray-500 mt-4">
+                        <div class="flex items-center mr-4">
+                            <i class="far fa-comment mr-1"></i>
+                            <span>0 answers</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="far fa-eye mr-1"></i>
+                            <span>7 views</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- No Answers Yet -->
+                <div class="border-t border-gray-200 bg-gray-50 p-6 text-center">
+                    <p class="text-gray-600 mb-3">No answers yet. Be the first to help Omar!</p>
+                    <button class="bg-blue-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-blue-700 transition duration-300">
+                        Add an Answer
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Pagination -->
+        <div class="flex justify-center mt-10">
+            <nav class="inline-flex rounded-md shadow">
+                <a href="#" class="py-2 px-4 bg-white border border-gray-300 rounded-l-md text-gray-700 hover:bg-gray-50">Previous</a>
+                <a href="#" class="py-2 px-4 bg-blue-600 border border-blue-600 text-white">1</a>
+                <a href="#" class="py-2 px-4 bg-white border border-gray-300 text-gray-700 hover:bg-gray-50">2</a>
+                <a href="#" class="py-2 px-4 bg-white border border-gray-300 text-gray-700 hover:bg-gray-50">3</a>
+                <a href="#" class="py-2 px-4 bg-white border border-gray-300 rounded-r-md text-gray-700 hover:bg-gray-50">Next</a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Add Exercise Modal -->
+    <div id="addExerciseModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-xl shadow-xl max-w-2xl w-full mx-4">
+            <div class="p-6 border-b border-gray-200">
+                <div class="flex justify-between items-center">
+                    <h3 class="text-xl font-semibold text-gray-800">Add New Exercise</h3>
+                    <button id="closeModalBtn" class="text-gray-400 hover:text-gray-600">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="p-6">
+                <form>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 font-medium mb-2">Title</label>
+                        <input type="text" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Enter exercise title">
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="block text-gray-700 font-medium mb-2">Description</label>
+                        <textarea class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 h-32" placeholder="Describe your exercise or question"></textarea>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="block text-gray-700 font-medium mb-2">Categories</label>
+                        <div class="flex flex-wrap gap-2">
+                            <div class="flex items-center">
+                                <input type="checkbox" id="cat-c" class="mr-2">
+                                <label for="cat-c">C</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" id="cat-shell" class="mr-2">
+                                <label for="cat-shell">Shell</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" id="cat-piscine" class="mr-2">
+                                <label for="cat-piscine">Piscine</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" id="cat-cpp" class="mr-2">
+                                <label for="cat-cpp">C++</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" id="cat-python" class="mr-2">
+                                <label for="cat-python">Python</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" id="cat-web" class="mr-2">
+                                <label for="cat-web">Web</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="block text-gray-700 font-medium mb-2">Code (optional)</label>
+                        <textarea class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 h-32 font-mono" placeholder="Paste your code here"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="p-6 border-t border-gray-200 flex justify-end">
+                <button id="cancelBtn" class="bg-gray-100 text-gray-700 px-6 py-2 rounded-lg font-medium hover:bg-gray-200 transition duration-300 mr-2">Cancel</button>
+                <button class="bg-blue-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-blue-700 transition duration-300">Submit Exercise</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Modal functionality
+        const addExerciseBtn = document.getElementById('addExerciseBtn');
+        const addExerciseModal = document.getElementById('addExerciseModal');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const cancelBtn = document.getElementById('cancelBtn');
+        
+        addExerciseBtn.addEventListener('click', () => {
+            addExerciseModal.classList.remove('hidden');
+        });
+        
+        closeModalBtn.addEventListener('click', () => {
+            addExerciseModal.classList.add('hidden');
+        });
+        
+        cancelBtn.addEventListener('click', () => {
+            addExerciseModal.classList.add('hidden');
+        });
+        
+        // Category tabs functionality
+        const categoryTabs = document.querySelectorAll('.category-tab');
+        
+        categoryTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs
+                categoryTabs.forEach(t => {
+                    t.classList.remove('active');
+                    t.classList.add('bg-gray-100');
+                    t.classList.add('text-gray-700');
+                });
+                
+                // Add active class to clicked tab
+                tab.classList.add('active');
+                tab.classList.remove('bg-gray-100');
+                tab.classList.remove('text-gray-700');
+            });
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'952f28ff54be3676',t:'MTc1MDQ2MzMzOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><iframe height="1" width="1" style="position: absolute; top: 0px; left: 0px; border: none; visibility: hidden;"></iframe>
+
+</body></html>
